@@ -72,7 +72,7 @@ Generate the Code 128 Barcode, including the checksum. [Output font is Libre Bar
 3. In the "Microsoft Visual Basic for Applications" window > File menu > click "Import File...".
 4. Browse to the "ICARDA_VBA_Toolkit.bas" file and import it, then close this MS VBA window.
    
-   _This will add toolkit functions to the current workbook._
+That's it. Save the Excel file. You can now use this toolkit functions in that spreadsheet!
 
 ## Loading into OpenOffice/LibreOffice
 
