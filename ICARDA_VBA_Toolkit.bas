@@ -151,7 +151,7 @@ Public Function DD2DMS(decStr As String) As Variant
     Seconds = Round((((decStr - Degrees) * 60) - Minutes) * 60, 4)
     
     outStr = ""
-    If (Degrees > 0) Then outStr = Degrees & "°"
+    If (Degrees > 0) Then outStr = Degrees & Chr(176)
     
     If (Minutes >= 10) Then
         outStr = outStr & Minutes & "'"
