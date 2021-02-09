@@ -63,13 +63,18 @@ Generate the Code 128 Barcode, including the checksum. [Output font is Libre Bar
 |OLC2DD|=olc2dd(C7, 2)|8G5QRX6R+65|35.990375|
 |Barcode|=barcode(C10)|C0M2Pe1AzUn4R|ÌC0M2Pe1AzUn4RjÎ|
 
-## Loading Into Excel
+## Loading into Excel
 
-1. Start Excel
-2. Select the menu option Tools > Macro > Visual Basic Editor
-3. After the project window opens, select the menu option File > Import File and import the ICARDA_Toolkit.bas file. This will add the functions to the current workbook.
+1. Download the ZIP file of this VBA toolkit > unzip it somewhere on your computer.
+2. Start Excel > right-click on the worksheet name tab > click "View Code". 
+   
+   _This will open the "Microsoft Visual Basic for Application" editor window._
+3. In the "Microsoft Visual Basic for Applications" window > File menu > click "Import File...".
+4. Browse to the "ICARDA_VBA_Toolkit.bas" file and import it, then close this MS VBA window.
+   
+   _This will add toolkit functions to the current workbook._
 
-## Loading Into OpenOffice/LibreOffice
+## Loading into OpenOffice/LibreOffice
 
 To add the library to a OpenOffice or LibreOffice spreadsheet, follow these steps (this example uses LibreOffice):
 
