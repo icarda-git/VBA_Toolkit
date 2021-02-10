@@ -111,7 +111,7 @@ Public Function Barcode(myLabel As String) As Variant
         checksum = checksum + 105
     End If
     
-    Barcode = "Ì" & myLabel & Chr(checksum) & "Î"
+    Barcode = Chr(204) & myLabel & Chr(checksum) & Chr(206)
 End Function
 
 ' Convert Degrees Minutes Seconds (DMS) coordinates to Decimal Degrees (DD)
