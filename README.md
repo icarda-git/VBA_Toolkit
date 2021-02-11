@@ -10,7 +10,7 @@
 
 **_Disclaimer:_** This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
-**_Citation:_** Khaled Al-Shamaa (2021). ICARDA VBA Toolkit. ICARDA, Cairo, Egypt. URL https://github.com/khaled-alshamaa/VBA_Toolkit
+**_Citation:_** Khaled Al-Shamaa (2021). ICARDA VBA Toolkit. ICARDA, Cairo, Egypt. URL https://github.com/icarda-git/VBA_Toolkit
 
 ## Function Description
 
