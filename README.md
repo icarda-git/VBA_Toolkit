@@ -1,16 +1,16 @@
 # ICARDA VBA Toolkit for Excel
 
-**_Copyright:_** 2019-2021, ICARDA
+**_Copyright:_** 2019-2022, ICARDA
 
 **_Author:_** Khaled Al-Shamaa <k.el-shamaa@cgiar.org>
 
-**_Version:_** 2.0
+**_Version:_** 3.0
 
 **_License:_** This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
 
 **_Disclaimer:_** This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
-**_Citation:_** Khaled Al-Shamaa (2021). ICARDA VBA Toolkit. ICARDA, Cairo, Egypt. URL https://github.com/icarda-git/VBA_Toolkit
+**_Citation:_** Khaled Al-Shamaa (2022). ICARDA VBA Toolkit. ICARDA, Cairo, Egypt. URL https://github.com/icarda-git/VBA_Toolkit
 
 ## Function Description
 
@@ -23,6 +23,16 @@ Convert Degrees Minutes Seconds (DMS) coordinates to Decimal Degrees (DD) format
 Convert Decimal Degrees (DD) coordinates to Degrees Minutes Seconds (DMS) format.
 
 `dd2dms(double)`
+
+### DDM2DD
+Convert Degrees Decimal Minutes (DDM) coordinates to Decimal Degrees (DD) format.
+
+`ddm2dd(string)`
+
+### DD2DDM
+Convert Decimal Degrees (DD) coordinates to Degrees Decimal Minutes (DDM) format.
+
+`dd2ddm(double)`
 
 ### DD2OLC
 Encode a location coordinates in decimal degrees (latitude and longitude in [WGS84](https://en.wikipedia.org/wiki/World_Geodetic_System)) into [Open Location Code](https://github.com/google/open-location-code/blob/master/docs/specification.md) string.
@@ -55,13 +65,15 @@ Generate the Code 128 Barcode, including the checksum. [Output font is Libre Bar
 |Function|Example Call|Example Input|Example Output|
 |---|---|---|---|
 |DMS2DD|=dms2dd(C3)|6° 42' 56.88'' W|-6.7158|
-|DD2DMS|=dd2dms(C4)|33.6157|33°36'56.52"|
+|DD2DMS|=dd2dms(C4)|-6.7158|6°42'56.88"|
 |DD2OLC|=dd2olc(C5, C6)|33.810558|8G5QRX6R+65|
 | | |35.990411|[https://plus.codes/8G5QRX6R+65](https://plus.codes/8G5QRX6R+65)|
 |OLC2DD|=olc2dd(C7)|8G5QRX6R+65|33.8105, 35.990375|
 |OLC2DD|=olc2dd(C7, 1)|8G5QRX6R+65|33.8105|
 |OLC2DD|=olc2dd(C7, 2)|8G5QRX6R+65|35.990375|
 |Barcode|=barcode(C10)|C0M2Pe1AzUn4R|ÌC0M2Pe1AzUn4RjÎ|
+|DDM2DD|=ddm2dd(C11)|31 41.592|31.68333333|
+|DD2DDM|=dd2ddm(C12)|31.4159|31°24.954'|
 
 ## Loading into Excel
 
