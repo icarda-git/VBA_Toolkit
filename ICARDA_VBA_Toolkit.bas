@@ -1,11 +1,14 @@
 Attribute VB_Name = "ICARDA_Toolkit"
 
-' Name:      ICARDA-VBA-Toolkit-v2.bas
-' Copyright: 2019-2021, ICARDA
+' Name:      ICARDA-VBA-Toolkit-v3.xlsm
+' Copyright: 2019-2022, ICARDA
 ' Purpose:   Set of VBA utility functions
 ' Author:    Khaled Al-Shamaa <k.el-shamaa@cgiar.org>
-' Version:   2.0
-' Revision:  25 Jan 2021 - add DD2OLC, OLC2DD, and VOLC functions
+' Version:   3.0
+' Revision:  14 Jul 2022 - add DDM2DD & DD2DDM functions
+'                        - fix DD2DMS bug in handle negative values
+'                        - the °, ', " symbols aren't mandatory
+'            25 Jan 2021 - add DD2OLC, OLC2DD, and VOLC functions
 '            12 Jan 2019 - initial version
 ' License:   GPLv3
 
@@ -87,7 +90,7 @@ Public Function VOLC(olc As String, Optional codeLength As Integer = 10) As Vari
 End Function
 
 
-' Generate the Code 128 Barcode, including the checksum.
+' Generate the Code 128 Barcode, including the checksum
 Public Function Barcode(myLabel As String) As Variant
     Dim ch As String, n As Long, sum As Long, checksum As Integer
     sum = 104
@@ -111,7 +114,7 @@ Public Function Barcode(myLabel As String) As Variant
         checksum = checksum + 105
     End If
     
-    Barcode = Chr(204) & myLabel & Chr(checksum) & Chr(206)
+    Barcode = "Ì" & myLabel & Chr(checksum) & "Î"
 End Function
 
 ' Convert Degrees Minutes Seconds (DMS) coordinates to Decimal Degrees (DD)
@@ -119,11 +122,8 @@ Public Function DMS2DD(degStr As String) As Variant
     Dim regEx As Object
     Set regEx = CreateObject("vbscript.regexp")
 
-    degStr = Replace(degStr, " ", "")
-    degStr = Replace(degStr, "''", """")
-    
-    'You degree symbol by click on Alt+0176 from the numkey
-    regEx.Pattern = "(([0-9\.]+)[^'""0-9\.])?(([0-9\.]+)')?(([0-9\.]+)"")?([WwSs])?"
+    ' You can get the degree symbol by click on Alt+0176 from the numkey
+    regEx.Pattern = "(([0-9]+)[^0-9\.]+)?(([0-9]+)[^0-9\.]+)?(([0-9\.]+)[^0-9WwSs]+)?([WwSs])?"
 
     If regEx.Test(degStr) Then
         Set regMatchs = regEx.Execute(degStr)
@@ -146,12 +146,13 @@ End Function
 
 ' Convert Decimal Degrees (DD) coordinates to Degrees Minutes Seconds (DMS)
 Public Function DD2DMS(decStr As String) As Variant
+    decStr = Abs(decStr)
     Degrees = Int(decStr)
     Minutes = Int((decStr - Degrees) * 60)
     Seconds = Round((((decStr - Degrees) * 60) - Minutes) * 60, 4)
     
     outStr = ""
-    If (Degrees > 0) Then outStr = Degrees & Chr(176)
+    If (Degrees > 0) Then outStr = Degrees & "°"
     
     If (Minutes >= 10) Then
         outStr = outStr & Minutes & "'"
@@ -166,4 +167,48 @@ Public Function DD2DMS(decStr As String) As Variant
     End If
     
     DD2DMS = outStr
+End Function
+
+' Convert Degrees Decimal Minutes (DDM) coordinates to Decimal Degrees (DD)
+Public Function DDM2DD(degStr As String) As Variant
+    Dim regEx As Object
+    Set regEx = CreateObject("vbscript.regexp")
+
+    ' You can get the degree symbol by click on Alt+0176 from the numkey
+    regEx.Pattern = "(([0-9]+)[^0-9\.]+)?(([0-9\.]+)[^0-9WwSs]+)?([WwSs])?"
+
+    If regEx.Test(degStr) Then
+        Set regMatchs = regEx.Execute(degStr)
+        
+        x = regMatchs(0).SubMatches(1)
+        y = regMatchs(0).SubMatches(3)
+        
+        If (Len(regMatchs(0).SubMatches(4)) = 1) Then
+            D = -1
+        Else
+            D = 1
+        End If
+    Else
+        MsgBox ("Oops!")
+    End If
+    
+    DDM2DD = D * (x + (y / 60))
+End Function
+
+' Convert Decimal Degrees (DD) coordinates to Degrees Decimal Minutes (DDM)
+Public Function DD2DDM(decStr As String) As Variant
+    decStr = Abs(decStr)
+    Degrees = Int(decStr)
+    Minutes = Round(((decStr - Degrees) * 60), 4)
+    
+    outStr = ""
+    If (Degrees > 0) Then outStr = Degrees & "°"
+    
+    If (Minutes >= 10) Then
+        outStr = outStr & Minutes & "'"
+    ElseIf (Minutes > 0) Then
+        outStr = outStr & "0" & Minutes & "'"
+    End If
+    
+    DD2DDM = outStr
 End Function
