@@ -7,7 +7,7 @@ Attribute VB_Name = "ICARDA_Toolkit"
 ' Version:   3.0
 ' Revision:  14 Jul 2022 - add DDM2DD & DD2DDM functions
 '                        - fix DD2DMS bug in handle negative values
-'                        - the Â°, ', " symbols aren't mandatory
+'                        - the °, ', " symbols aren't mandatory
 '            25 Jan 2021 - add DD2OLC, OLC2DD, and VOLC functions
 '            12 Jan 2019 - initial version
 ' License:   GPLv3
@@ -114,7 +114,7 @@ Public Function Barcode(myLabel As String) As Variant
         checksum = checksum + 105
     End If
     
-    Barcode = "ÃŒ" & myLabel & Chr(checksum) & "ÃŽ"
+    Barcode = "Ì" & myLabel & Chr(checksum) & "Î"
 End Function
 
 ' Convert Degrees Minutes Seconds (DMS) coordinates to Decimal Degrees (DD)
@@ -152,7 +152,7 @@ Public Function DD2DMS(decStr As String) As Variant
     Seconds = Round((((decStr - Degrees) * 60) - Minutes) * 60, 4)
     
     outStr = ""
-    If (Degrees > 0) Then outStr = Degrees & "Â°"
+    If (Degrees > 0) Then outStr = Degrees & "°"
     
     If (Minutes >= 10) Then
         outStr = outStr & Minutes & "'"
@@ -202,7 +202,7 @@ Public Function DD2DDM(decStr As String) As Variant
     Minutes = Round(((decStr - Degrees) * 60), 4)
     
     outStr = ""
-    If (Degrees > 0) Then outStr = Degrees & "Â°"
+    If (Degrees > 0) Then outStr = Degrees & "°"
     
     If (Minutes >= 10) Then
         outStr = outStr & Minutes & "'"
